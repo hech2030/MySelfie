@@ -1,4 +1,18 @@
+//using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore;
+using MySelfieApp.Context;
+
 var builder = WebApplication.CreateBuilder(args);
+
+//TODO: Application really needs an application insight logs ????
+//builder.Services.AddApplicationInsightConfig();
+
+var connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
+builder.Services.AddDbContext<ApplicationDbContext>(options =>
+    options.UseSqlServer(connectionString));
+
+//builder.Services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
+//    .AddEntityFrameworkStores<ApplicationDbContext>();
 
 // Add services to the container.
 

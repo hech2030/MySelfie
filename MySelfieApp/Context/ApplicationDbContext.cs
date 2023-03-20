@@ -1,8 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using MySelfieApp.Context.Extensions;
 using MySelfieApp.Context.Models;
-using System;
-using System.Reflection.Metadata;
 
 namespace MySelfieApp.Context
 {
@@ -28,6 +26,8 @@ namespace MySelfieApp.Context
             modelBuilder.AddEntityConfigurationsFromAssembly(GetType().Assembly);
 
             base.OnModelCreating(modelBuilder);
+
+            modelBuilder.AddApplicationUserConfiguration();
         }
         #endregion
     }

@@ -1,5 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using MySelfieApp.Context.Config;
+using MySelfieApp.Context.Models;
 using System.Reflection;
 
 namespace MySelfieApp.Context.Extensions
@@ -18,6 +19,22 @@ namespace MySelfieApp.Context.Extensions
             {
                 config.Map(modelBuilder);
             }
+        }
+
+        public static void AddApplicationUserConfiguration(this ModelBuilder modelBuilder)
+        {
+            modelBuilder.Entity<ApplicationUser>(entity =>
+            {
+                entity.Property(e => e.Address)
+                .HasMaxLength(100);
+
+                entity.Property(e => e.City)
+                .HasMaxLength(100);
+
+                entity.Property(e => e.BirthDate);
+
+                entity.Property(e => e.CreationDate).HasDefaultValueSql("(getutcdate())");
+            });
         }
     }
 }

@@ -1,5 +1,6 @@
 //using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
+using MySelfieApp.Config;
 using MySelfieApp.Context;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -8,14 +9,11 @@ var builder = WebApplication.CreateBuilder(args);
 //builder.Services.AddApplicationInsightConfig();
 
 var connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
+
 builder.Services.AddDbContext<ApplicationDbContext>(options =>
     options.UseSqlServer(connectionString));
 
-//builder.Services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
-//    .AddEntityFrameworkStores<ApplicationDbContext>();
-
-// Add services to the container.
-
+builder.Services.AddAppIdentity();
 builder.Services.AddControllersWithViews();
 
 var app = builder.Build();
